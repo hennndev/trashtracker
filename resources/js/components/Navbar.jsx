@@ -17,7 +17,9 @@ const Navbar = () => {
             <div className='min-w-[150px] absolute flex items-start flex-col space-y-2 top-6 right-0 bg-white shadow-md rounded-md py-3 px-5'>
               <p className='text-sm line-clamp-1 text-gray-500'>Hai, {auth.user?.name}</p>
               <button className='text-sm mt-2' onClick={() => router.visit("/")}>Beranda</button>
-              <button className='text-sm' onClick={() => router.visit("/dashboard")}>My Dashboard</button>
+              <button className='text-sm' onClick={() => router.visit("/dashboard")}>Dashboard</button>
+              <button className='text-sm' onClick={() => router.visit("/report")}>Report</button>
+              <button className='text-sm' onClick={() => router.visit("/history")}>History</button>
               <button className='text-sm text-red-400' onClick={() => router.post("/logout")}>Logout</button>
             </div>
           )}

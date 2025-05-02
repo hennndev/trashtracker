@@ -23,6 +23,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function trash_report() {
+        return $this->belongsTo(TrashReport::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
