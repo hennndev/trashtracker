@@ -43,10 +43,10 @@ const Register = ({title}) => {
     <main className='bg-white h-dvh'>
       <section className='flex-center flex-col w-full h-full px-5'>
         <section className='w-full md:w-[400px]'>
-          <h1 className='font-black text-4xl text-[#16C47F] self-start mb-3'>TrashTrack</h1>
+          <h1 className='font-black text-4xl text-green-900 self-start mb-3'>TrashTrack</h1>
           <form onSubmit={handleSubmit} className='w-full self-start'>
-            <h1 className='text-[#336D82] text-2xl font-bold mb-1'>Sign Up</h1>
-            <p className='text-[#4F959D] font-normal leading-[1.5]'>Bergabunglah bersama kami dalam misi menciptakan dunia yang lebih bersih</p>
+            <h1 className='text-green-800 text-2xl font-bold mb-1'>Sign Up</h1>
+            <p className='text-green-800 font-normal leading-[1.5]'>Bergabunglah bersama kami dalam misi menciptakan dunia yang lebih bersih</p>
             <div className='w-full flexx rounded-[10px] border border-[#0000004D] px-4 mt-7'>
               <LuCircleUserRound className='text-xl mr-2 text-gray-400'/>
               <input 
@@ -83,9 +83,9 @@ const Register = ({title}) => {
             {errors.password && (
               <p className='text-sm mt-1 text-red-400'>{errors.password}</p>
             )}
-            <button type='submit' className='h-[50px] bg-[#16C47F] text-center text-white w-full rounded-[10px] mt-5 font-medium text-lg'>Sign Up</button>
+            <button type='submit' className='h-[50px] bg-green-800 text-center text-white w-full rounded-[10px] mt-5 font-medium text-lg'>Sign Up</button>
           </form>      
-          <p className='mt-3 self-start text-gray-500'>Have an account? <Link href="/login" className='text-[#16C47F]'>Log In</Link></p>
+          <p className='mt-3 self-start text-gray-500'>Have an account? <Link href="/login" className='text-green-800 underline'>Log In</Link></p>
         </section>
       </section>
     </main>

@@ -15,7 +15,7 @@ const Home = ({title}) => {
         <title>{title}</title>
       </Head>
 
-      <Navbar/>
+      {/* <Navbar/> */}
       <main className='bg-white min-h-screen px-4 mt-10'>  
         <section className='flex-center flex-col space-y-3'>
           <img src={map} alt="" className='w-full h-[250px] object-contain'/>

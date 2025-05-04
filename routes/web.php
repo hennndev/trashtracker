@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -30,13 +31,10 @@ Route::middleware("auth")->group(function() {
 
 // Route untuk user biasa
 Route::middleware(["auth", "is_user"])->group(function() {
-  Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
-  Route::get("/report", [ReportController::class, "index"])->name("report");
-  Route::post("/trash-reports", [ReportController::class, "store"])->name("trash-reports.store");
-  Route::put("/trash-reports/{id}", [ReportController::class, "update"])->name("trash-reports.update");
-  Route::delete("/trash-reports/{id}", [ReportController::class, "destroy"])->name("trash-reports.destroy");
-
-  Route::get("/history", [HistoryController::class, "index"])->name("history");
+  Route::get("/beranda", [UserDashboardController::class, "beranda"])->name("beranda");
+  Route::get("/laporkan-temuan", [UserDashboardController::class, "report_finding"])->name("report_finding");  
+  Route::get("/history", [UserDashboardController::class, "history"])->name("history");
+  Route::get("/panduan", [UserDashboardController::class, "panduan"])->name("panduan");
 });
 
 // Route untuk admin saja
