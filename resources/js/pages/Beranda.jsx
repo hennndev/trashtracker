@@ -4,9 +4,31 @@ import Navbar from '../components/Navbar'
 import { LuLightbulb, LuTriangleAlert, LuHandshake, LuCheckCheck, LuX, LuClock } from "react-icons/lu";
 
 
-const Beranda = ({title}) => {
+const Beranda = ({title, data}) => {
 
   const { auth } = usePage().props
+
+  const totalData = data.length
+  const dataApproved = data.reduce((curr, data) => {
+    if(data.status === "completed") {
+      return curr + 1
+    }
+    return curr
+  }, 0) || 0
+  const dataProcess = data.reduce((curr, data) => {
+    if(data.status === "process") {
+      return curr + 1
+    }
+    return curr
+  }, 0) || 0
+  const dataReject = data.reduce((curr, data) => {
+    if(data.status === "reject") {
+      return curr + 1
+    }
+    return curr
+  }, 0) || 0
+
+  console.log(data)
 
   return (
     <>
@@ -40,8 +62,8 @@ const Beranda = ({title}) => {
             </div>
             <div className='flex flex-col space-y-2'>
               <p className='text-gray-500'>Total kontribusi kamu</p>
-              <h1 className='text-3xl font-black'>33</h1>
-              <p className='text-sm text-blue-400 tracking-wide'>Melapor 31 temuan di 28 titik</p>
+              <h1 className='text-3xl font-black'>{totalData}</h1>
+              <p className='text-sm text-blue-400 tracking-wide'>Melapor {totalData} temuan</p>
             </div>
           </div>
           <div className='flex p-5 bg-white shadow-md rounded-md'>
@@ -50,8 +72,8 @@ const Beranda = ({title}) => {
             </div>
             <div className='flex flex-col space-y-2'>
               <p className='text-gray-500'>Total temuan disetujui</p>
-              <h1 className='text-3xl font-black'>31</h1>
-              <p className='text-sm text-green-500 tracking-wide'>Total 31 temuan disetujui</p>
+              <h1 className='text-3xl font-black'>{dataApproved}</h1>
+              <p className='text-sm text-green-500 tracking-wide'>Total {dataApproved} dari  temuan yang disetujui</p>
             </div>
           </div>
           <div className='flex p-5 bg-white shadow-md rounded-md'>
@@ -60,8 +82,8 @@ const Beranda = ({title}) => {
             </div>
             <div className='flex flex-col space-y-2'>
               <p className='text-gray-500'>Total temuan diproses</p>
-              <h1 className='text-3xl font-black'>1</h1>
-              <p className='text-sm text-orange-400 tracking-wide'>Total 1 temuan diproses</p>
+              <h1 className='text-3xl font-black'>{dataProcess}</h1>
+              <p className='text-sm text-orange-400 tracking-wide'>Total {dataProcess} temuan diproses</p>
             </div>
           </div>
           <div className='flex p-5 bg-white shadow-md rounded-md'>
@@ -70,8 +92,8 @@ const Beranda = ({title}) => {
             </div>
             <div className='flex flex-col space-y-2'>
               <p className='text-gray-500'>Total temuan ditolak</p>
-              <h1 className='text-3xl font-black'>1</h1>
-              <p className='text-sm text-red-400 tracking-wide'>Total 1 temuan ditolak</p>
+              <h1 className='text-3xl font-black'>{dataReject}</h1>
+              <p className='text-sm text-red-400 tracking-wide'>Total {dataReject} temuan ditolak</p>
             </div>
           </div>
         </div>

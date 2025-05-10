@@ -1,12 +1,12 @@
 import React from 'react'
 import Swal from 'sweetalert2';
-import { Head, Link, useForm } from '@inertiajs/react'
-import logo from "../../assets/trashtrack.png"
+import { Head, Link, useForm, usePage, router } from '@inertiajs/react'
 import { LuCircleUserRound, LuLockKeyhole } from "react-icons/lu"
 
 
 const Login = ({title}) => {
 
+  const { auth } = usePage().props
   const { data, setData, post, errors, reset, processing } = useForm({
     email: "",
     password: ""
@@ -17,7 +17,7 @@ const Login = ({title}) => {
 
     post("/login", {
       onSuccess: (response) => {
-        console.log(response)
+
       },
       onError: (response) => {
        if(response.error) {
@@ -48,8 +48,7 @@ const Login = ({title}) => {
             <div className='w-full flexx rounded-[10px] border border-[#0000004D] px-4 mt-7'>
               <LuCircleUserRound className='text-xl mr-2 text-gray-400'/>
               <input 
-                type="email"
-                id='email' 
+                type="email" 
                 placeholder='Email' 
                 value={data.email}
                 onChange={(e) => setData("email", e.target.value)}
@@ -62,7 +61,6 @@ const Login = ({title}) => {
               <LuLockKeyhole className='text-xl mr-2 text-gray-400'/>
               <input 
                 type="password" 
-                id='password'
                 placeholder='Password' 
                 value={data.password}
                 onChange={(e) => setData("password", e.target.value)}

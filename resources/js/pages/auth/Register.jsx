@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 
 const Register = ({title}) => {
 
-  const { data, setData, post, errors, reset } = useForm({
+  const { data, setData, post, errors, reset, processing } = useForm({
     name: "",
     email: "",
     password: ""
@@ -83,7 +83,9 @@ const Register = ({title}) => {
             {errors.password && (
               <p className='text-sm mt-1 text-red-400'>{errors.password}</p>
             )}
-            <button type='submit' className='h-[50px] bg-green-800 text-center text-white w-full rounded-[10px] mt-5 font-medium text-lg'>Sign Up</button>
+            <button type='submit' disabled={processing} className={`h-[50px] text-center text-white w-full rounded-[10px] mt-5 font-medium text-lg cursor-pointer ${processing ? "bg-gray-400" : "bg-green-800"}`}>
+              {processing ? "Loading.." : "Sign Up"}
+            </button>
           </form>      
           <p className='mt-3 self-start text-gray-500'>Have an account? <Link href="/login" className='text-green-800 underline'>Log In</Link></p>
         </section>

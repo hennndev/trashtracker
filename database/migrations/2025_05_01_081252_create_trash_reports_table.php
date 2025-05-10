@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string("photo");
             $table->text("description");
+            $table->text("full_address");
             $table->decimal("latitude", 10, 7);
             $table->decimal("longitude", 10, 7);
-            $table->string("status");
+            $table->string("status")->default("pending");
             $table->timestamps();
 
             $table->foreignId("user_id")->constrained()->onUpdate("cascade");

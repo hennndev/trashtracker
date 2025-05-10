@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class TrashReport extends Model
 {
-    protected $fillable = ["photo", "description", "latitude", "longitude", "status", "user_id"];
+    protected $fillable = ["photo", "description", "full_address", "latitude", "longitude", "status", "user_id"];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
