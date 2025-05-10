@@ -10,13 +10,14 @@ const FormLaporTemuan = () => {
     full_address: "",
     latitude: "",
     longitude: "",
-    user_id: auth.user.id
+    user_id: auth.user.id,
+    photo: null
   })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     post("/laporkan-temuan", {
+      forceFormData: true,
       onSuccess: (response) => {
         Swal.fire({
           icon: "success",
@@ -64,18 +65,6 @@ const FormLaporTemuan = () => {
         )}
       </div>
       <div className='flex flex-col space-y-1.5 mb-4'>
-        <label htmlFor="pelapor">Foto Laporan</label>
-        <input
-          type="text"
-          value={data.photo}
-          onChange={(e) => setData("photo", e.target.value)}
-          placeholder='Input test foto'
-          className='border border-gray-300 outline-none rounded-md p-3' />
-        {errors.photo && (
-          <p className='text-sm text-red-400 mt-1'>{errors.photo}</p>
-        )}
-      </div>
-      <div className='flex flex-col space-y-1.5 mb-4'>
         <label htmlFor="pelapor">Koordinat Longitude</label>
         <input
           type="number"
@@ -97,6 +86,17 @@ const FormLaporTemuan = () => {
           className='border border-gray-300 outline-none rounded-md p-3' />
         {errors.latitude && (
           <p className='text-sm text-red-400 mt-1'>{errors.latitude}</p>
+        )}
+      </div>
+      <div className='flex flex-col space-y-1.5 mb-4'>
+        <label htmlFor="pelapor">Insert foto laporan kamu</label>
+        <input
+          type="file"
+          onChange={(e) => setData("photo", e.target.files[0])}
+          accept='image/*'
+          className='border border-gray-300 outline-none rounded-md p-3' />
+        {errors.photo && (
+          <p className='text-sm text-red-400 mt-1'>{errors.photo}</p>
         )}
       </div>
       <button type='submit' className={`cursor-pointer py-3 px-6 text-center w-full rounded-md outline-none text-white mt-5 ${processing ? "bg-gray-500" : "bg-green-800"}`}>

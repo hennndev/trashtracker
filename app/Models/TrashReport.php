@@ -13,4 +13,8 @@ class TrashReport extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function setPhotoAttribute($value)
+    {
+        $this->attributes['photo'] = filter_var($value, FILTER_SANITIZE_URL);
+    }
 }
