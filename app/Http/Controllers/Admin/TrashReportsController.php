@@ -11,7 +11,7 @@ use Inertia\Inertia;
 class TrashReportsController extends Controller
 {
     public function index() {
-        $data = TrashReport::with("user")->get();
+        $data = TrashReport::with("user")->latest()->get();
         $title = "TrashTracker | Admin Trash Reports";
         return Inertia::render("admin/TrashReports", compact("title", "data"));
     }

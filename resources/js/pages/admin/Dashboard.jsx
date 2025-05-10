@@ -16,7 +16,7 @@ const Dashboard = ({ title, data, users, data_today }) => {
       onSuccess: (response) => {
         Swal.fire({
           icon: "success",
-          title: "Laporan temuan berhasil diunggah",
+          title: "Laporan temuan berhasil diedit",
           text: response.message
         })
       },

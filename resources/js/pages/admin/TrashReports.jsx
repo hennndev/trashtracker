@@ -61,10 +61,10 @@ const TrashReports = ({ title, data: dataReport }) => {
     <Layout title={title} navbarTitle="Trash Reports">
       <main className='p-5 mt-5'>
         <div className='mb-7'>
-          <button className='flexx bg-blue-500 rounded-md py-2 px-4 text-white cursor-pointer'>
+          <a href="/admin/export-pdf/trash-report" target='_blank' className='w-max flexx bg-blue-500 rounded-md py-2 px-4 text-white cursor-pointer'>
             <LuDownload className='text-xl mr-2' />
             Export PDF
-          </button>
+          </a>
         </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
           <table className="w-full text-left rtl:text-right text-gray-500">

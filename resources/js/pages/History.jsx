@@ -48,7 +48,7 @@ const History = ({ title, data }) => {
               <div className='flexx'>
                 <LuClock className='text-gray-900 text-2xl mr-5' />
                 <div className='flex flex-col space-y-1'>
-                  <h3 className='text-gray-900 font-semibold'>Laporan {data.id} {ACTION[data.status]}</h3>
+                  <h3 className='text-gray-900 font-semibold'>Laporan #0{data.id} {ACTION[data.status]}</h3>
                   <p className='text-sm text-gray-500 tracking-wide'>Admin {ADMIN_ACTION[data.status]}.</p>
                 </div>
               </div>
