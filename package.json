@@ -17,6 +17,7 @@
     "dependencies": {
         "@inertiajs/react": "^2.0.8",
         "@vitejs/plugin-react": "^4.4.1",
+        "clsx": "^2.1.1",
         "date-fns": "^4.1.0",
         "leaflet": "^1.9.4",
         "react-dom": "^19.1.0",

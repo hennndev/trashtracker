@@ -3,6 +3,7 @@ import Layout from '../../components/admin/Layout'
 import { LuDownload } from "react-icons/lu"
 import { useForm, router } from '@inertiajs/react'
 import Swal from 'sweetalert2'
+import Pagination from '../../components/Pagination'
 
 
 const getStatusColor = (status) => {
@@ -22,7 +23,7 @@ const getStatusColor = (status) => {
 
 const TrashReports = ({ title, data: dataReport }) => {
 
-  const [data, setDataReport] = useState(dataReport)
+  const [data, setDataReport] = useState(dataReport.data)
 
   const handleChangeStatus = (id, newStatus) => {
     router.patch(`/admin/laporan-temuan/${id}`, { status: newStatus }, {
@@ -57,6 +58,9 @@ const TrashReports = ({ title, data: dataReport }) => {
     setDataReport(transformData)
   }
 
+
+  console.log(dataReport.total)
+
   return (
     <Layout title={title} navbarTitle="Trash Reports">
       <main className='p-5 mt-5'>
@@ -75,6 +79,9 @@ const TrashReports = ({ title, data: dataReport }) => {
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Pelapor
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Foto
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Deskripsi
@@ -98,6 +105,9 @@ const TrashReports = ({ title, data: dataReport }) => {
                   </th>
                   <td className="px-6 py-4">
                     {data.user.name}
+                  </td>
+                  <td className="px-6 py-4">
+                    <img src={data.photo} alt="" className='w-[100px] h-[100px] object-contain'/>
                   </td>
                   <td className="px-6 py-4">
                     <button className='text-blue-500 underline'>Lihat deskripsi</button>
@@ -124,6 +134,12 @@ const TrashReports = ({ title, data: dataReport }) => {
             </tbody>
           </table>
         </div>
+
+        {dataReport.total > 10 && (
+          <div className='flex-center mt-10'>
+            <Pagination current_page={dataReport.current_page} last_page={dataReport.last_page} />
+          </div>
+        )}
       </main>
     </Layout>
   )

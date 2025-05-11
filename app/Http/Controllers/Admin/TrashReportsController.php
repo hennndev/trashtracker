@@ -10,8 +10,12 @@ use Inertia\Inertia;
 
 class TrashReportsController extends Controller
 {
-    public function index() {
-        $data = TrashReport::with("user")->latest()->get();
+    public function index(Request $request) {
+        $page = $request->query("page");
+        $data = TrashReport::with("user")->latest()->paginate(10);
+        if($page > $data->lastPage() || $page < 0) {
+            return redirect()->route('admin.trash_report');
+        }
         $title = "TrashTracker | Admin Trash Reports";
         return Inertia::render("admin/TrashReports", compact("title", "data"));
     }

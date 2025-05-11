@@ -8,6 +8,8 @@ use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
+
 //Route bisa diakses kalo belum login, tapi kalo udah login sebagai user otomatis bakal pindah sendiri ke halaman beranda
 // Semisal login sebagai admin bakal pindah sendiri ke halaman /admin/dashboard
 Route::get("/", function() {
@@ -42,7 +44,7 @@ Route::middleware(["auth", "is_user"])->group(function() {
   Route::get("/panduan", [UserDashboardController::class, "panduan"])->name("panduan");
 
   Route::post("/laporkan-temuan", [UserDashboardController::class, "store"])->name("report_finding.store");
-  Route::put("/laporkan-temuan/{id}", [UserDashboardController::class, "update"]);
+  Route::put("/laporkan-temuan/{id}", [UserDashboardController::class, "update"])->name("report_finding.update");
 });
 
 
@@ -51,11 +53,11 @@ Route::middleware(["auth", "is_user"])->group(function() {
 Route::middleware(["auth", "is_admin"])->group(function() {
   Route::prefix("admin")->group(function() {
     Route::get("/dashboard", [AdminDashboardController::class, "index"])->name("admin.dashboard");
-    Route::get("/trash-reports", [TrashReportsController::class, "index"])->name("admin.trash-reports");
+    Route::get("/laporan-temuan", [TrashReportsController::class, "index"])->name("admin.trash_report");
 
-    Route::patch("/laporan-temuan/{id}", [TrashReportsController::class, "update"])->name("admin.laporan-temuan.update");
+    Route::patch("/laporan-temuan/{id}", [TrashReportsController::class, "update"])->name("admin.trash_report.update");
 
 
-    Route::get("/export-pdf/trash-report", [PDFController::class, "export"])->name("admin.pdf-export");
+    Route::get("/export-pdf/laporan-temuan", [PDFController::class, "export"])->name("admin.pdf-export");
   });
 });

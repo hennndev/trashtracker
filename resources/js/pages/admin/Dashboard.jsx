@@ -85,6 +85,9 @@ const Dashboard = ({ title, data, users, data_today }) => {
     return curr
   }, 0)
 
+
+  const dataTodayPending = data_today.filter(data => data.status === "pending")
+
   return (
     <Layout title={title} navbarTitle="Dashboard">
       <main className='p-5'>
@@ -93,7 +96,7 @@ const Dashboard = ({ title, data, users, data_today }) => {
 
         <div className='mt-5 p-5 bg-blue-100 rounded-md'>
           <h5 className='text-[#1B56FD] text-lg'>Ringkasan Hari Ini</h5>
-          <p className='text-gray-500 mt-2'>Ada 7 laporan baru untuk hari ini dan 13 laporan yang memerlukan tindakan segera</p>
+          <p className='text-gray-500 mt-2'>Ada {data_today.length} laporan baru untuk hari ini dan {dataTodayPending.length} laporan yang memerlukan tindakan segera</p>
         </div>
 
         <div className='grid grid-cols-4 gap-5 mt-7'>

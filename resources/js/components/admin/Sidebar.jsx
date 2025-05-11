@@ -18,9 +18,9 @@ const Sidebar = () => {
         </div>
 
         {/* Laporan Sampah */}
-        <div onClick={() => router.visit("/admin/trash-reports")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-[#16C47F] rounded-md cursor-pointer ${pathname === "trash-reports" ? "bg-[#16C47F]" : "bg-transparent"}`}>
-          <LuClipboardList className={`text-2xl group-hover:text-white ${pathname === "trash-reports" ? "text-white" : "text-gray-600"}`}/>
-          <p className={`text-lg group-hover:text-white ${pathname === "trash-reports" ? "text-white" : "text-gray-500"}`}>Laporan Sampah</p>
+        <div onClick={() => router.visit("/admin/laporan-temuan")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-[#16C47F] rounded-md cursor-pointer ${pathname === "laporan-temuan" ? "bg-[#16C47F]" : "bg-transparent"}`}>
+          <LuClipboardList className={`text-2xl group-hover:text-white ${pathname === "laporan-temuan" ? "text-white" : "text-gray-600"}`}/>
+          <p className={`text-lg group-hover:text-white ${pathname === "laporan-temuan" ? "text-white" : "text-gray-500"}`}>Laporan Sampah</p>
         </div>
 
         {/* Wilayah */}
