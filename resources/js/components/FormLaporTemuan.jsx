@@ -1,6 +1,5 @@
-import React from 'react'
-import { useForm, usePage } from "@inertiajs/react"
 import Swal from 'sweetalert2'
+import { useForm, usePage } from "@inertiajs/react"
 
 const FormLaporTemuan = () => {
 
@@ -88,13 +87,19 @@ const FormLaporTemuan = () => {
           <p className='text-sm text-red-400 mt-1'>{errors.latitude}</p>
         )}
       </div>
-      <div className='flex flex-col space-y-1.5 mb-4'>
+      <div className='flex flex-col space-y-2 mb-4'>
         <label htmlFor="pelapor">Insert foto laporan kamu</label>
-        <input
-          type="file"
-          onChange={(e) => setData("photo", e.target.files[0])}
-          accept='image/*'
-          className='border border-gray-300 outline-none rounded-md p-3' />
+        <div className="relative w-full">
+          <label className="block w-full cursor-pointer border rounded px-4 py-2 text-center bg-gray-100 hover:bg-gray-200">
+            Pilih File
+            <input
+              type="file"
+              className="hidden"
+              accept='image/*'
+              onChange={(e) => setData("photo", e.target.files[0])}
+            />
+          </label>
+        </div>
         {errors.photo && (
           <p className='text-sm text-red-400 mt-1'>{errors.photo}</p>
         )}

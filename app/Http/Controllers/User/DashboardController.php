@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\TrashReport;
+use Carbon\Carbon;
 use Cloudinary\Cloudinary;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,8 +21,9 @@ class DashboardController extends Controller
             ->where("user_id", Auth::user()->id)
             ->latest()
             ->get();
+        $data_today = TrashReport::with("user", "proof")->whereDate('created_at', Carbon::today())->latest()->get();
         $title = "TrashTrack | Beranda";
-        return Inertia::render("Beranda", compact("title", "data"));
+        return Inertia::render("Beranda", compact("title", "data", "data_today"));
     }
 
     public function report_finding()
@@ -32,7 +34,7 @@ class DashboardController extends Controller
 
     public function history()
     {
-        $data = TrashReport::with("user")
+        $data = TrashReport::with("user", "proof")
             ->where("user_id", Auth::user()->id)
             ->latest()
             ->get();

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { format } from "date-fns"
 import { id } from "date-fns/locale"
-import Swal from 'sweetalert2'
 import { usePage, router } from '@inertiajs/react'
 import Layout from '../../components/admin/Layout'
 
@@ -9,59 +8,34 @@ import Layout from '../../components/admin/Layout'
 const Dashboard = ({ title, data, users, data_today }) => {
 
   const { auth } = usePage().props
-  const [dataReport, setDataReport] = useState(data)
-
-  const handleChangeStatus = (id, newStatus) => {
-    router.patch(`/admin/laporan-temuan/${id}`, { status: newStatus }, {
-      onSuccess: (response) => {
-        Swal.fire({
-          icon: "success",
-          title: "Laporan temuan berhasil diedit",
-          text: response.message
-        })
-      },
-      onError: (response) => {
-        if (response.error) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: response.error,
-          });
-        }
-      }
-    })
-
-    const transformData = data.map(data => {
-      if (data.id === id) {
-        return {
-          ...data,
-          status: newStatus
-        }
-      } else {
-        return data
-      }
-    })
-    setDataReport(transformData)
-  }
+  const [dataReport] = useState(data)
 
   const getStatusColor = (status) => {
     switch (status) {
       case 'pending':
-        return 'bg-gray-400';
+        return 'text-gray-400';
       case 'process':
-        return 'bg-yellow-400';
+        return 'text-yellow-400';
       case 'reject':
-        return 'bg-red-400';
-      case 'completed':
-        return 'bg-green-400';
+        return 'text-red-400';
+      case 'approved':
+        return 'text-green-400';
+      case 'done':
+        return 'text-emerald-400';
       default:
-        return 'bg-gray-400'; // default case
+        return 'text-gray-400'; // default case
     }
   }
 
   const totalData = dataReport.length
-  const totalDataCompleted = dataReport.reduce((curr, data) => {
-    if (data.status === "completed") {
+  const totalDataDone = dataReport.reduce((curr, data) => {
+    if (data.status === "done") {
+      return curr + 1
+    }
+    return curr
+  }, 0)
+  const totalDataApproved = dataReport.reduce((curr, data) => {
+    if (data.status === "approved") {
       return curr + 1
     }
     return curr
@@ -85,7 +59,6 @@ const Dashboard = ({ title, data, users, data_today }) => {
     return curr
   }, 0)
 
-
   const dataTodayPending = data_today.filter(data => data.status === "pending")
 
   return (
@@ -104,9 +77,13 @@ const Dashboard = ({ title, data, users, data_today }) => {
             <h2 className='text-xl font-semibold'>Total Laporan</h2>
             <p className='mt-5 text-lg text-gray-600'>{totalData} Laporan</p>
           </div>
+          <div className='bg-emerald-200 shadow-sm p-5 rounded-md'>
+            <h2 className='text-xl font-semibold'>Laporan sudah ditangani</h2>
+            <p className='mt-5 text-lg text-gray-600'>{totalDataDone} Laporan</p>
+          </div>
           <div className='bg-green-200 shadow-sm p-5 rounded-md'>
-            <h2 className='text-xl font-semibold'>Laporan terselesaikan</h2>
-            <p className='mt-5 text-lg text-gray-600'>{totalDataCompleted} Laporan</p>
+            <h2 className='text-xl font-semibold'>Laporan disetujui</h2>
+            <p className='mt-5 text-lg text-gray-600'>{totalDataApproved} Laporan</p>
           </div>
           <div className='bg-red-200 shadow-sm p-5 rounded-md'>
             <h2 className='text-xl font-semibold'>Laporan ditolak</h2>
@@ -127,7 +104,10 @@ const Dashboard = ({ title, data, users, data_today }) => {
         </div>
 
         <div className='mt-10'>
-          <h2 className='text-xl font-bold'>Laporan Terbaru</h2>
+          <div className='flex items-center justify-between'>
+            <h2 className='text-xl font-bold'>Laporan Terbaru</h2>
+            <h2 className='text-blue-500 hover:underline cursor-pointer' onClick={() => router.visit("/admin/laporan-temuan")}>Lihat semua</h2>
+          </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
             <table class="w-full text-left rtl:text-right text-gray-500">
@@ -149,7 +129,7 @@ const Dashboard = ({ title, data, users, data_today }) => {
                     Lihat lokasi
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    Action
+                    Status
                   </th>
                 </tr>
               </thead>
@@ -171,16 +151,8 @@ const Dashboard = ({ title, data, users, data_today }) => {
                     <td class="px-6 py-4">
                       <button className='text-blue-500 underline'>Lihat lokasi</button>
                     </td>
-                    <td className="px-6 py-4">
-                      <select
-                        value={data.status}
-                        onChange={(e) => handleChangeStatus(data.id, e.target.value)}
-                        className={`${getStatusColor(data.status)} rounded-md p-2 text-white`}>
-                        <option value="pending">Pending</option>
-                        <option value="process">Proses</option>
-                        <option value="reject">Tolak</option>
-                        <option value="completed">Selesai</option>
-                      </select>
+                    <td className={`px-6 py-4 font-bold ${getStatusColor(data.status)}`}>
+                      {data.status}
                     </td>
                   </tr>
                 ))}

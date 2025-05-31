@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\TrashReportProofControll;
 use App\Http\Controllers\Admin\TrashReportsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PDFController;
@@ -42,7 +43,6 @@ Route::middleware(["auth", "is_user"])->group(function() {
   Route::get("/laporkan-temuan", [UserDashboardController::class, "report_finding"])->name("report_finding");  
   Route::get("/history", [UserDashboardController::class, "history"])->name("history");
   Route::get("/panduan", [UserDashboardController::class, "panduan"])->name("panduan");
-
   Route::post("/laporkan-temuan", [UserDashboardController::class, "store"])->name("report_finding.store");
   Route::put("/laporkan-temuan/{id}", [UserDashboardController::class, "update"])->name("report_finding.update");
 });
@@ -54,9 +54,9 @@ Route::middleware(["auth", "is_admin"])->group(function() {
   Route::prefix("admin")->group(function() {
     Route::get("/dashboard", [AdminDashboardController::class, "index"])->name("admin.dashboard");
     Route::get("/laporan-temuan", [TrashReportsController::class, "index"])->name("admin.trash_report");
+    Route::put("/laporan-temuan/{id}", [TrashReportsController::class, "update"])->name("admin.trash_report.update");
 
-    Route::patch("/laporan-temuan/{id}", [TrashReportsController::class, "update"])->name("admin.trash_report.update");
-
+    Route::post("/bukti-laporan-selesai", [TrashReportProofControll::class, "store"])->name("admin.trash_report_proof.store");
 
     Route::get("/export-pdf/laporan-temuan", [PDFController::class, "export"])->name("admin.pdf-export");
   });

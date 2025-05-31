@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trash_reports', function (Blueprint $table) {
+        Schema::create('trash_report_proofs', function (Blueprint $table) {
             $table->id();
             $table->string("photo");
             $table->text("description");
-            $table->text("full_address");
-            $table->decimal("latitude", 10, 7);
-            $table->decimal("longitude", 10, 7);
-            $table->string("status")->default("pending");
-            $table->text("status_description")->nullable();
+            $table->timestamp('verified_at')->nullable();
             $table->timestamps();
-
-            $table->foreignId("user_id")->constrained()->onUpdate("cascade");
+            $table->foreignId("trash_report_id")->constrained()->onDelete("cascade");
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trash_reports');
+        Schema::dropIfExists('trash_report_proofs');
     }
 };
