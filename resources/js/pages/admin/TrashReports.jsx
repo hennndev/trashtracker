@@ -106,7 +106,7 @@ const TrashReports = ({ title, data: dataReport }) => {
                     {data.full_address}
                   </td>
                   <td className="px-6 py-4">
-                    <button className='text-blue-500 underline cursor-pointer'>Lihat lokasi</button>
+                    <button onClick={() => router.visit(`/admin/laporan-temuan/lokasi?longitude=${data.longitude}&latitude=${data.latitude}`)} className='text-blue-500 underline cursor-pointer'>Lihat lokasi</button>
                   </td>
                   <td className={`px-6 py-4 font-bold ${getStatusColor(data.status)}`}>
                     {data.status}

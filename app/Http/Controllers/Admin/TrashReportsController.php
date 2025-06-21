@@ -30,6 +30,16 @@ class TrashReportsController extends Controller
     return Inertia::render("admin/TrashReports", compact("title", "data"));
   }
 
+  public function location(Request $request) {
+    $title = "Location";
+    if(!$request->query("longitude") && !$request->query("latitude")) {
+      return redirect()->route("admin.trash_report");
+    }
+    $longitude = $request->query("longitude");
+    $latitude = $request->query("latitude");
+    return Inertia::render("admin/LocationTrashReport", compact("title", "longitude", "latitude"));
+  }
+
 
   public function update(Request $request, $id)
   {

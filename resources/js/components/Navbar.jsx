@@ -28,9 +28,6 @@ const Navbar = () => {
           <div onClick={() => router.visit("/history")} className={`py-3 px-6 cursor-pointer ${pathname === "history" ? "bg-green-700" : "bg-transparent"}`}>
             <p className='text-gray-100 text-base whitespace-nowrap'>History</p>
           </div>
-          <div onClick={() => router.visit("/panduan")} className={`py-3 px-6 cursor-pointer ${pathname === "panduan" ? "bg-green-700" : "bg-transparent"}`}>
-            <p className='text-gray-100 text-base whitespace-nowrap'>Panduan</p>
-          </div>
         </div>
         {auth.user?.role === "user" && (
           <div className='relative z-[999] max-sm:mr-5'>

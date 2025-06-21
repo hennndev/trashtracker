@@ -1,7 +1,8 @@
 import Swal from 'sweetalert2'
+import { useState, useEffect } from 'react'
 import { useForm, usePage } from "@inertiajs/react"
 
-const FormLaporTemuan = () => {
+const FormLaporTemuan = ({mapLocation}) => {
 
   const { auth } = usePage().props
   const { post, errors, processing, data, setData, reset } = useForm({
@@ -12,6 +13,22 @@ const FormLaporTemuan = () => {
     user_id: auth.user.id,
     photo: null
   })
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          setData("longitude", position.coords.longitude)
+          setData("latitude", position.coords.latitude)
+        },
+        error => {
+          console.error("Geolocation error:", error)
+        }
+      )
+    } else {
+      console.error("Geolocation not supported by this browser.")
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -36,6 +53,14 @@ const FormLaporTemuan = () => {
       }
     })
   }
+
+  useEffect(() => {
+    if(mapLocation) {
+      setData("longitude", mapLocation.longitude)
+      setData("latitude", mapLocation.latitude)
+    }
+  }, [mapLocation.longitude, mapLocation.latitude])
+  
 
   return (
     <form onSubmit={handleSubmit}>
