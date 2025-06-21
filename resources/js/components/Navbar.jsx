@@ -46,7 +46,7 @@ const Navbar = () => {
         <div className='relative'>
           <LuCircleUserRound className='text-2xl text-gray-600' onClick={() => setDropdown(!dropdown)} />
           {dropdown && (
-            <div className='min-w-[150px] absolute flex items-start flex-col space-y-2 top-6 right-0 bg-white shadow-md rounded-md py-3 px-5'>
+            <div className='min-w-[150px] z-[999] absolute flex items-start flex-col space-y-2 top-6 right-0 bg-white shadow-md rounded-md py-3 px-5'>
               <p className='text-sm line-clamp-1 text-gray-500'>Hai, {auth.user?.name}</p>
               <button className='text-sm mt-2' onClick={() => router.visit("/")}>Home</button>
               <button className='text-sm' onClick={() => router.visit("/admin/dashboard")}>Dashboard</button>
