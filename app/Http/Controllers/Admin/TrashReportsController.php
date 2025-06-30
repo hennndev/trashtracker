@@ -14,10 +14,24 @@ class TrashReportsController extends Controller
   public function index(Request $request)
   {
     $page = $request->query('page');
-    $sortBy = $request->query('sort', 'status'); // default sort by 'status'
-    $direction = $request->query('direction', 'asc'); // default arah sort
+    $sortBy = $request->query('sort', 'status');
+    $direction = $request->query('direction', 'asc');
 
-    $data = TrashReport::with('user')
+    // Ambil query parameter status
+    $statuses = $request->query('status');
+
+    $query = TrashReport::with('user');
+
+    // Filter kalau ada status
+    if ($statuses) {
+      if (is_string($statuses)) {
+        // Kalau hanya 1 status, jadikan array
+        $statuses = [$statuses];
+      }
+      $query->whereIn('status', $statuses);
+    }
+
+    $data = $query
       ->orderBy($sortBy, $direction)
       ->paginate(10)
       ->withQueryString();
@@ -27,12 +41,15 @@ class TrashReportsController extends Controller
     }
 
     $title = "TrashTracker | Admin Trash Reports";
+
     return Inertia::render("admin/TrashReports", compact("title", "data"));
   }
 
-  public function location(Request $request) {
+
+  public function location(Request $request)
+  {
     $title = "Location";
-    if(!$request->query("longitude") && !$request->query("latitude")) {
+    if (!$request->query("longitude") && !$request->query("latitude")) {
       return redirect()->route("admin.trash_report");
     }
     $longitude = $request->query("longitude");
@@ -49,6 +66,4 @@ class TrashReportsController extends Controller
     ]);
     return back()->with("success", "Berhasil mengedit status data laporan sampah");
   }
-
-  
 }

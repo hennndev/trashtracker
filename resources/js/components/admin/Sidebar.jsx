@@ -24,16 +24,16 @@ const Sidebar = () => {
         </div>
 
         {/* Wilayah */}
-        <div onClick={() => router.visit("/admin/zone")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-green-800 rounded-md cursor-pointer ${pathname === "zone" ? "bg-green-800" : "bg-transparent"}`}>
+        {/* <div onClick={() => router.visit("/admin/zone")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-green-800 rounded-md cursor-pointer ${pathname === "zone" ? "bg-green-800" : "bg-transparent"}`}>
           <LuMap className={`text-2xl group-hover:text-white ${pathname === "zone" ? "text-white" : "text-gray-600"}`}/>
           <p className={`text-lg group-hover:text-white ${pathname === "zone" ? "text-white" : "text-gray-500"}`}>Wilayah</p>
-        </div>
+        </div> */}
 
         {/* Statistik */}
-        <div onClick={() => router.visit("/admin/statistic")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-green-800 rounded-md cursor-pointer ${pathname === "statistic" ? "bg-green-800" : "bg-transparent"}`}>
+        {/* <div onClick={() => router.visit("/admin/statistic")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-green-800 rounded-md cursor-pointer ${pathname === "statistic" ? "bg-green-800" : "bg-transparent"}`}>
           <LuChartLine className={`text-2xl group-hover:text-white ${pathname === "statistic" ? "text-white" : "text-gray-600"}`}/>
           <p className={`text-lg group-hover:text-white ${pathname === "statistic" ? "text-white" : "text-gray-500"}`}>Statistik</p>
-        </div>
+        </div> */}
       </div>
     </aside>
   )

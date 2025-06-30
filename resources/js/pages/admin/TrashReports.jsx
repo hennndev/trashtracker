@@ -8,6 +8,7 @@ import { FaSortAlphaDown, FaSortAlphaDownAlt } from "react-icons/fa";
 import ModalEditTrashReport from '../../components/admin/ModalEditTrashReport'
 import ModalTrashReportProof from '../../components/admin/ModalTrashReportProof'
 import ModalDescriptionTrashReport from '../../components/admin/ModalDescriptionTrashReport'
+import ModalFilter from '../../components/admin/ModalFilter'
 
 
 const getStatusColor = (status) => {
@@ -32,6 +33,7 @@ const TrashReports = ({ title, data: dataReport }) => {
   const [modalEdit, setModalEdit] = useState(null)
   const [modalDescription, setModalDescription] = useState(null)
   const [modalCreateProof, setModalCreateProof] = useState(null)
+  const [modalFilter, setModalFilter] = useState(false)
   const [data, setDataReport] = useState(dataReport.data)
   const [direction, setDirection] = useState('asc')
 
@@ -57,11 +59,19 @@ const TrashReports = ({ title, data: dataReport }) => {
   return (
     <Layout title={title} navbarTitle="Trash Reports">
       <main className='p-5 mt-5'>
-        <div className='mb-7'>
-          <a href="/admin/export-pdf/laporan-temuan" target='_blank' className='w-max flexx bg-green-800 rounded-md py-2 px-4 text-white cursor-pointer'>
+        <div className='mb-7 flex items-center space-x-5'>
+          <a
+            href={`/admin/export-pdf/laporan-temuan${window.location.search}`}
+            target='_blank'
+            className='w-max flexx bg-green-800 rounded-md py-2 px-4 text-white cursor-pointer'
+          >
             <LuDownload className='text-xl mr-2' />
             Export PDF
           </a>
+
+          <button className='w-max flexx bg-transparent border border-green-800 text-green-800 rounded-md py-2 px-4 cursor-pointer' onClick={() => setModalFilter(true)}>
+            Filter Laporan
+          </button>
         </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
           <table className="w-full text-left rtl:text-right text-gray-500">
@@ -154,7 +164,11 @@ const TrashReports = ({ title, data: dataReport }) => {
         <ModalDescriptionTrashReport
           data={modalDescription}
           closeModal={() => setModalDescription(null)}
-          />
+        />
+      )}
+      {modalFilter && (
+        <ModalFilter
+          closeModal={() => setModalFilter(false)} />
       )}
     </Layout>
   )
