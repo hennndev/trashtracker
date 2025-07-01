@@ -7,7 +7,7 @@ const ModalFilter = ({ closeModal }) => {
 
   const statuses = [
     { value: 'process', label: 'Proses' },
-    { value: 'rejected', label: 'Ditolak' },
+    { value: 'reject', label: 'Ditolak' },
     { value: 'approved', label: 'Disetujui' },
     { value: 'done', label: 'Selesai' },
   ]
