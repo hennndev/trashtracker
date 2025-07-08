@@ -11,10 +11,10 @@ const Navbar = ({title}) => {
       <h2 className='text-xl font-semibold'>{title}</h2>
 
       <div className='flexx space-x-3'>
-        <div className='relative'>
+        {/* <div className='relative'>
           <LuBell className='text-xl text-gray-500' />
           <div className='absolute -top-3 -right-2 flex-center w-5 h-5 rounded-full bg-red-500 text-xs text-white'>10</div>
-        </div>
+        </div> */}
         {auth.user && (
           <div className='relative'>
             <LuCircleUserRound className='text-2xl text-gray-500 cursor-pointer' onClick={() => setDropdown(!dropdown)} />

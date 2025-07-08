@@ -57,7 +57,7 @@ const TrashReports = ({ title, data: dataReport }) => {
 
 
   return (
-    <Layout title={title} navbarTitle="Trash Reports">
+    <Layout title={title} navbarTitle="Laporan Sampah">
       <main className='p-5 mt-5'>
         <div className='mb-7 flex items-center space-x-5'>
           <a

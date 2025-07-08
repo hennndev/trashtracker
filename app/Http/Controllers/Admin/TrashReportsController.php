@@ -40,7 +40,7 @@ class TrashReportsController extends Controller
       return redirect()->route('admin.trash_report');
     }
 
-    $title = "TrashTracker | Admin Trash Reports";
+    $title = "TrashTracker | Admin Laporan Sampah";
 
     return Inertia::render("admin/TrashReports", compact("title", "data"));
   }

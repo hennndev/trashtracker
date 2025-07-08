@@ -1,5 +1,5 @@
 import React from 'react'
-import { LuChartLine, LuClipboardList, LuHouse, LuMap } from "react-icons/lu"
+import { LuChartLine, LuClipboardList, LuHouse, LuMap, LuUsers } from "react-icons/lu"
 import { router, usePage } from '@inertiajs/react'
 
 const Sidebar = () => {
@@ -19,21 +19,23 @@ const Sidebar = () => {
 
         {/* Laporan Sampah */}
         <div onClick={() => router.visit("/admin/laporan-temuan")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-green-800 rounded-md cursor-pointer ${pathname.startsWith("laporan-temuan") ? "bg-green-800" : "bg-transparent"}`}>
-          <LuClipboardList className={`text-2xl group-hover:text-white ${pathname.startsWith("laporan-temuan") ? "text-white" : "text-gray-600"}`}/>
+          <LuUsers className={`text-2xl group-hover:text-white ${pathname.startsWith("laporan-temuan") ? "text-white" : "text-gray-600"}`}/>
           <p className={`text-lg group-hover:text-white ${pathname.startsWith("laporan-temuan") ? "text-white" : "text-gray-500"}`}>Laporan Sampah</p>
         </div>
 
-        {/* Wilayah */}
-        {/* <div onClick={() => router.visit("/admin/zone")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-green-800 rounded-md cursor-pointer ${pathname === "zone" ? "bg-green-800" : "bg-transparent"}`}>
-          <LuMap className={`text-2xl group-hover:text-white ${pathname === "zone" ? "text-white" : "text-gray-600"}`}/>
-          <p className={`text-lg group-hover:text-white ${pathname === "zone" ? "text-white" : "text-gray-500"}`}>Wilayah</p>
-        </div> */}
-
-        {/* Statistik */}
-        {/* <div onClick={() => router.visit("/admin/statistic")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-green-800 rounded-md cursor-pointer ${pathname === "statistic" ? "bg-green-800" : "bg-transparent"}`}>
-          <LuChartLine className={`text-2xl group-hover:text-white ${pathname === "statistic" ? "text-white" : "text-gray-600"}`}/>
-          <p className={`text-lg group-hover:text-white ${pathname === "statistic" ? "text-white" : "text-gray-500"}`}>Statistik</p>
-        </div> */}
+        {/* Laporan Sampah */}
+        <div onClick={() => router.visit("/admin/pengguna")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-green-800 rounded-md cursor-pointer ${pathname.startsWith("pengguna") ? "bg-green-800" : "bg-transparent"}`}>
+          <LuClipboardList className={`text-2xl group-hover:text-white ${pathname.startsWith("pengguna") ? "text-white" : "text-gray-600"}`}/>
+          <p className={`text-lg group-hover:text-white ${pathname.startsWith("pengguna") ? "text-white" : "text-gray-500"}`}>
+            Pengguna
+          </p>
+        </div>
+        <div onClick={() => router.visit("/admin/bukti-laporan-selesai")} className={`group flexx space-x-3 pl-5 py-2 hover:bg-green-800 rounded-md cursor-pointer ${pathname.startsWith("bukti-laporan-selesai") ? "bg-green-800" : "bg-transparent"}`}>
+          <LuClipboardList className={`text-2xl group-hover:text-white ${pathname.startsWith("bukti-laporan-selesai") ? "text-white" : "text-gray-600"}`}/>
+          <p className={`text-lg group-hover:text-white ${pathname.startsWith("bukti-laporan-selesai") ? "text-white" : "text-gray-500"}`}>
+            Bukti Laporan
+          </p>
+        </div>
       </div>
     </aside>
   )

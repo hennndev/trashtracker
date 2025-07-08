@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -18,7 +18,7 @@ const ChangeMapView = ({ coords }) => {
   return null
 }
 
-const DepokMap = ({setMapLocation}) => {
+const DepokMap = ({ setMapLocation }) => {
   const [position, setPosition] = useState([-6.4025, 106.7942]) // default: Depok
   const [search, setSearch] = useState('')
 
@@ -39,6 +39,37 @@ const DepokMap = ({setMapLocation}) => {
       alert('Lokasi tidak ditemukan!')
     }
   }
+
+  const ClickHandler = () => {
+    const map = useMapEvents({
+      click: async (e) => {
+        const { lat, lng } = e.latlng;
+
+        // Set koordinat
+        setPosition([lat, lng]);
+        setMapLocation({
+          latitude: lat,
+          longitude: lng,
+        });
+
+        // Fetch alamat reverse geocoding
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+        );
+        const data = await res.json();
+        if (data && data.display_name) {
+          // Set input search dengan alamat
+          setSearch(data.display_name);
+        } else {
+          setSearch('Alamat tidak ditemukan');
+        }
+      },
+    });
+
+    return null;
+  };
+
+
   return (
     <>
       <div className='mb-5'>
@@ -52,16 +83,25 @@ const DepokMap = ({setMapLocation}) => {
           Cari dan tambahkan info lokasi ke form
         </button>
       </div>
-      <MapContainer center={position} zoom={13} style={{ height: '700px', width: '100%' }}>
+      <MapContainer
+        center={position}
+        zoom={13}
+        style={{ height: '700px', width: '100%' }}
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; OpenStreetMap contributors"
         />
+
+        {/* Marker dari hasil search */}
         <Marker position={position} icon={pinIcon}>
-          <Popup>Lokasi ditemukan!</Popup>
+          <Popup>{search || 'Lokasi ditemukan'}</Popup>
         </Marker>
+
         <ChangeMapView coords={position} />
+        <ClickHandler />
       </MapContainer>
+
     </>
   );
 };

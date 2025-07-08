@@ -24,7 +24,7 @@ class User extends Authenticatable
     ];
 
     public function trash_report() {
-        return $this->belongsTo(TrashReport::class);
+        return $this->hasMany(TrashReport::class, 'user_id');
     }
 
     /**
