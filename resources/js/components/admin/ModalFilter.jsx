@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { router } from '@inertiajs/react'
 import { IoClose } from "react-icons/io5"
 

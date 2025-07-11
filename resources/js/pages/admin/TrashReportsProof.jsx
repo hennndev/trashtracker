@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { router } from '@inertiajs/react'
 import Layout from '../../components/admin/Layout'
 import Pagination from '../../components/Pagination'
@@ -6,7 +6,7 @@ import ModalDescriptionTrashReportProof from '../../components/admin/ModalDescri
 import ModalDescriptionTrashReport from '../../components/admin/ModalDescriptionTrashReport'
 
 
-const TrashReports = ({ title, data }) => {
+const TrashReportsProof = ({ title, data }) => {
   const [modalDescription, setModalDescription] = useState(null)
   const [modalDescriptionTrashReportProof, setModalDescriptionTrashReportProof] = useState(null)
   return (
@@ -86,4 +86,4 @@ const TrashReports = ({ title, data }) => {
   )
 }
 
-export default TrashReports
+export default TrashReportsProof

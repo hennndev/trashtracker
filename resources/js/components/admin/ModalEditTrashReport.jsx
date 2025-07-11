@@ -1,3 +1,4 @@
+import React from "react";
 import Swal from 'sweetalert2'
 import { IoClose } from "react-icons/io5"
 import { useForm } from '@inertiajs/react'

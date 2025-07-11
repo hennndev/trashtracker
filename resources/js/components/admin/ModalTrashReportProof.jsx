@@ -1,3 +1,4 @@
+import React from "react"
 import Swal from 'sweetalert2'
 import { IoClose } from "react-icons/io5"
 import { useForm } from '@inertiajs/react'
@@ -79,7 +80,7 @@ const ModalTrashReportProof = ({ closeModal, reportId, dataReport, setDataReport
             )}
           </div>
 
-          <div className='flex flex-col space-y-1.5' mb-3>
+          <div className='flex flex-col space-y-1.5'>
             <label htmlFor="verified_at">Tanggal Verifikasi</label>
             <input
               type="date"

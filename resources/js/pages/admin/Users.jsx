@@ -1,10 +1,8 @@
+import React from "react"
 import Layout from '../../components/admin/Layout'
 import Pagination from '../../components/Pagination'
 
 const Users = ({ title, data }) => {
-
-  console.log(data)
-
   return (
     <Layout title={title} navbarTitle="Manajemen Pengguna">
       <main className='p-5 mt-5'>

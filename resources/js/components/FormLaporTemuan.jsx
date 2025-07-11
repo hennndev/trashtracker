@@ -1,8 +1,8 @@
 import Swal from 'sweetalert2'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm, usePage } from "@inertiajs/react"
 
-const FormLaporTemuan = ({mapLocation}) => {
+const FormLaporTemuan = ({ mapLocation }) => {
 
   const { auth } = usePage().props
   const { post, errors, processing, data, setData, reset } = useForm({
@@ -55,12 +55,13 @@ const FormLaporTemuan = ({mapLocation}) => {
   }
 
   useEffect(() => {
-    if(mapLocation) {
+    if (mapLocation) {
       setData("longitude", mapLocation.longitude)
       setData("latitude", mapLocation.latitude)
     }
-  }, [mapLocation.longitude, mapLocation.latitude])
-  
+  }, [mapLocation?.longitude, mapLocation?.latitude])
+
+
 
   return (
     <form onSubmit={handleSubmit}>
